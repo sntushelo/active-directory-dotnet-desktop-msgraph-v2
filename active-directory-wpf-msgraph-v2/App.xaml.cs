@@ -34,17 +34,22 @@ namespace active_directory_wpf_msgraph_v2
 
         static App()
         {
-            CreateApplication();
+            CreateApplication(withBrokerOptions: true);
         }
 
-        public static void CreateApplication()
+        public static void CreateApplication(bool withBrokerOptions = false)
         {
-            BrokerOptions brokerOptions = new BrokerOptions(BrokerOptions.OperatingSystems.Windows);
-
-            _clientApp = PublicClientApplicationBuilder.Create(ClientId)
-                .WithAuthority($"{Instance}{Tenant}")
+            var builder = PublicClientApplicationBuilder.Create(ClientId)
+                .WithAuthority(AzureCloudInstance.AzurePublic, Tenant); //$"{Instance}{Tenant}";
+            
+            if (withBrokerOptions)
+            {
+                BrokerOptions brokerOptions = new BrokerOptions(BrokerOptions.OperatingSystems.Windows);
+                builder = builder.WithBroker(brokerOptions);
+            }
+            
+            _clientApp = builder
                 .WithDefaultRedirectUri()
-                .WithBroker(brokerOptions)
                 .Build();
 
             MsalCacheHelper cacheHelper = CreateCacheHelperAsync().GetAwaiter().GetResult();
