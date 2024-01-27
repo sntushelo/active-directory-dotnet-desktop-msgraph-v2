@@ -23,7 +23,7 @@ namespace active_directory_wpf_msgraph_v2
         //   - for any Work or School accounts, use organizations
         //   - for any Work or School accounts, or Microsoft personal account, use common
         //   - for Microsoft Personal account, use consumers
-        private static string ClientId = "4a1aa1d5-c567-49d0-ad0b-cd957a47f842";
+        private static string ClientId = "bd32bfb2-315f-4d94-96d4-fbf9c395f299";
 
         // Note: Tenant is important for the quickstart.
         private static string Tenant = "common";
